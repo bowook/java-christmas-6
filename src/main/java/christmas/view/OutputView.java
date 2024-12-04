@@ -15,8 +15,8 @@ public class OutputView {
     private final static String TOTAL_BENEFIT_AMOUNT = "<총혜택 금액>";
     private final static String EXPECT_PAYMENT = "<할인 후 예상 결제 금액>";
     private final static String EVENT_BADGE = "<12월 이벤트 배지>";
-    private final static String NOT_MINUS_AMOUNT_FORMAT = "%,d원";
-    private final static String MINUS_AMOUNT_FORMAT = "-%,d원";
+    private final static String NOT_MINUS_AMOUNT_FORMAT = "%,d원" + System.lineSeparator();
+    private final static String MINUS_AMOUNT_FORMAT = "-%,d원" + System.lineSeparator();
 
     public void printEventBadge(Badge badge) {
         System.out.print(System.lineSeparator());
@@ -44,6 +44,7 @@ public class OutputView {
         System.out.println(BENEFIT_HISTORY);
         if (history.isBlank()) {
             System.out.println("없음");
+            System.out.print(System.lineSeparator());
             return;
         }
         System.out.println(history);
@@ -62,7 +63,6 @@ public class OutputView {
     public void printPrevDiscountTotalAmount(Orders orders) {
         System.out.println(BEFORE_DISCOUNT_TOTAL_AMOUNT);
         System.out.printf(NOT_MINUS_AMOUNT_FORMAT, orders.calculateTotalPrice());
-        System.out.print(System.lineSeparator());
     }
 
     public void printOrderMenu(Orders orders) {
