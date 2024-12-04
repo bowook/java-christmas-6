@@ -23,16 +23,28 @@ public class PromotionController {
         outputView.printWelcomeMessage();
         Day visitDay = readVisitDay();
         Orders orders = readOrders();
-        outputView.printPreviewMessage(visitDay);
-        outputView.printOrderMenu(orders);
-        outputView.printPrevDiscountTotalAmount(orders);
-        Menu proiveMenu = promotionService.provideMenu(orders);
-        outputView.printProvideMenu(proiveMenu);
+        writePrevMenu(visitDay, orders);
+        writeProvideMenu(orders);
+        writeFinal(visitDay, orders);
+        inputView.closeConsole();
+    }
+
+    private void writeFinal(Day visitDay, Orders orders) {
         outputView.printBenefitHistory(promotionService.benefitHistory(visitDay, orders));
         outputView.printTotalDiscount(promotionService.totalDiscount());
         outputView.printExpectAmount(promotionService.expectPayment());
         outputView.printEventBadge(promotionService.badge());
-        inputView.closeConsole();
+    }
+
+    private void writeProvideMenu(Orders orders) {
+        Menu proiveMenu = promotionService.provideMenu(orders);
+        outputView.printProvideMenu(proiveMenu);
+    }
+
+    private void writePrevMenu(Day visitDay, Orders orders) {
+        outputView.printPreviewMessage(visitDay);
+        outputView.printOrderMenu(orders);
+        outputView.printPrevDiscountTotalAmount(orders);
     }
 
     private Orders readOrders() {
